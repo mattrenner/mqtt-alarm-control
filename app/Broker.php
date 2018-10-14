@@ -56,6 +56,17 @@ class Broker extends EventEmitter {
             }
         });
 
+        $this->client->on('warning', function (\Exception $e) {
+            echo sprintf("Warning: %s\n", $e->getMessage());
+        });
+
+        $this->client->on('error', function (\Exception $e) use ($that) {
+            echo sprintf("Error: %s\n", $e->getMessage());
+
+            $that->loop->stop();
+        });
+
+
         $this->client->connect($this->url);
 
     }
