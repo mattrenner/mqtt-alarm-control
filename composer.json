@@ -1,0 +1,21 @@
+{
+    "name": "mattrenner/alarm-control",
+    "description": "A bridge for integrating the Arrowhead IP Module with Home Assistant or other MQTT platform",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Renner",
+            "email": "matt@rennernz.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "react/socket": "^0.8.9",
+        "binsoul/net-mqtt-client-react": "^1.0@dev"
+    },
+
+    "autoload": {
+        "psr-4": { "AlarmControl\\": "app/" }
+    }
+}
