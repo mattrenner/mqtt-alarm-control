@@ -45,10 +45,6 @@ class Broker extends EventEmitter {
     {
         $that = $this;
 
-        $this->client->on('connect', function (Connection $connection) use ($that) {
-            $that->client->subscribe(new DefaultSubscription('home/#'));
-        });
-
         // Re-emit messages from the broker so the alarm class can listen for them
         $this->client->on('message', function (Message $message) use ($that) {
             if(!$message->isDuplicate()){
@@ -67,7 +63,13 @@ class Broker extends EventEmitter {
         });
 
 
-        $this->client->connect($this->url);
+        $this->client->connect($this->url)
+            ->then(function() use ($that){
+                $that->client->subscribe(new DefaultSubscription('home/#'));
+            })
+            ->otherwise(function(\Exception $e){
+                echo sprintf("Error: %s\n", $e->getMessage());
+            });
 
     }
 
