@@ -18,7 +18,7 @@ class Disarmed implements MessageInterface {
 
     public static function getInternalDefinition()
     {
-        return 'armed';
+        return 'disarmed';
     }
 
     /**
